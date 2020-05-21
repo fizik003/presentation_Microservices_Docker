@@ -101,82 +101,132 @@
 					</section>
 					<section data-markdown>
 						<textarea data-template>
-							First, a docker image is created. It is created using the 
-							script that you write for this.Images are inherited and, usually,
-							to create our first image, we take the finished image and inherit from it. 
-							Most often, we take the image that contains this or that version of linux.
-							The script then starts something like this:
+							Docker simply splits the kernel of the OS into all containers 
+							(Docker container), working as separate processes. This is not 
+							the only such platform, but, undoubtedly, one of the most popular and in demand.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Its benefits include:
+							***
+							* Accelerated development process. 
+							* There is no need to install auxiliary tools like PostgreSQL, Redis, Elasticsearch: they can be run in containers.
+							* Convenient application encapsulation.
+							* Clear monitoring.
+							* Simple scaling.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Supported Platforms
+							***
+							Docker works not only on its native OS, Linux, but is also supported by Windows and macOS.
+							![](https://media.proglib.io/wp-uploads/2017/07/docker.png)
+						
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Installation
+							***
+							To install, enter the following command in the terminal
 							<pre><code data-trim data-noescape>
-								FROM ubuntu:16.04
+								sudo usermod -aG docker $(whoami)
 							</code></pre>
-							![](https://i.ibb.co/yPF003k/image-docker.jpg)
-						</textarea>
-					</section>
-					<section data-markdown>
-						<textarea data-template>
-							Further, with the help of the RUN directive, we can execute any commands that this Linux supports.
-							For example, <pre><code data-trim data-noescape></code> RUN apt-get install -y mc </code></pre> will install midnight commander into our image.
-						
-						</textarea>
-					</section>
-					<section data-markdown>
-						<textarea data-template>
-							##### Container creation
-						
-						</textarea>
-					</section>
-					<section data-markdown>
-						<textarea data-template>
-							When you already have a docker image, you can create a container 
-							from it on any physical server where the docker is installed. If image
-							 is a replicated image of some “machine”, then container is already the 
-							 “machine” itself, which can be started and stopped.
-							 ![](https://i.ibb.co/wWDbqJZ/container.jpg)
 
-						
 						</textarea>
 					</section>
 					<section data-markdown>
 						<textarea data-template>
-							##### Union filesystem
+							##### some terminology
+							***
+							* A container
+							* Image
+							* Port
+							* Tom 
+							* A registry
 						</textarea>
 					</section>
 					<section data-markdown>
 						<textarea data-template>
-							Union file system consists of layers. Layers are superimposed on each 
-							other. Some layers are write protected. For example, 
-							all our containers use shared, write-protected layers 
-							that contain immutable operating system files.
+							##### Example 1: Hello World
+							***
+							<pre><code data-trim data-noescape>
+								docker run ubuntu /bin/echo 'Hello world'
+							</code></pre>
+							With this command we launched ubuntu in the docker container
+
 						</textarea>
 					</section>
 					<section data-markdown>
 						<textarea data-template>
-							##### Container registry
+							##### Console output:
+							***
+							<pre><code data-trim data-noescape>
+								Unable to find image 'ubuntu:latest' locally  
+								latest: Pulling from library/ubuntu  
+								d54efb8db41d: Pull complete  
+								f8b845f45a87: Pull complete  
+								e8db7bf7c39f: Pull complete  
+								9654c40e9079: Pull complete  
+								6d9ef359eaaa: Pull complete  
+								Digest: sha256:dd7808d8792c9841d0b460122f1acf0a2dd1f56404f8d1e56298048885e45535  
+								Status: Downloaded newer image for ubuntu:latest  
+								Hello world
+
+							</code></pre>
 						</textarea>
 					</section>
 					<section data-markdown>
 						<textarea data-template>
-							Docker provides a special service called docker registry. Docker registry is intended
-							 for storage and distribution of finished images. Having collected a new image 
-							 (or a new version of the image), you can upload it to the docker registry. 
-							 Accordingly, then it can be downloaded from there to any server. 
-							The main feature here is that only those layers that are needed will physically swing.
+							##### command which we use
+							***
+							* docker run -  is a container launch command.
+							* ubuntu -  is the image that you are running  
+							* / bin / echo 'Hello world' - the command that will 
+							be run inside the new container.
+
 						</textarea>
 					</section>
 					<section data-markdown>
 						<textarea data-template>
-							#### Conclusion
-							Thus, the docker is very suitable for solving the above problems:
- 
-							* convenient transfer of the server project to the client
-							* server replication
-							* reuse of previously created server configurations
- 
+							#### create an interactive shell inside the container:
+							***
+							<pre><code data-trim data-noescape>
+								docker run -i -t --rm ubuntu /bin/bash
+							</code></pre>
+							* -t assigns terminal inside a new container.
+							* -i allows you to create an interactive connection 
+							* --rm is required to automatically remove the container when exiting the process.
+
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							#### Example 2: Nginx
+							***
+							<pre><code data-trim data-noescape>
+								docker run -d --name test-nginx -p 80:80 -v $(pwd):/usr/share/nginx/html:ro nginx:latest
+							</code></pre>
+							* -p - display ports HOST PORT: CONTAINER PORT.
+							* -v is responsible for the HOST DIRECTORY: CONTAINER DIRECTORY.
+
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>	
+						If you want to create an application using a microservice architecture,
+						you know that you have to distribute your application to several machines,
+						and you are also going to use various platforms and programming languages,
+						then docker is your way out.
 						</textarea>
 					</section>
 
 					
 				</section>
+				
 				
 				
 			

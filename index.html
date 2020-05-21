@@ -16,8 +16,225 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-markdown>
+					<textarea data-template>
+					  ## Microservices / Docker
+					  ![Microservices](https://i.ibb.co/YZtC73K/1.png)
+					</textarea>
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							Everyone knows what a monolithic application is: we all made such two- or three-layer applications with classical architecture:
+							
+							![](https://i.ibb.co/txG5Yhw/image1.png)
+
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							For small and simple applications, this architecture 
+							works fine, but let's say you want to improve the application 
+							by adding new services and logic to it.
+
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							#### problems of monolithic architectures:
+							1. system complexity is constantly growing;
+							2. maintain it harder and harder;
+							3.it’s difficult to understand it - especially if 
+							the system passed from generation to generation, 
+							logic was forgotten, people left and came, but 
+							there are no comments and tests);
+							4. a lot of mistakes;
+							5. expensive to make changes;
+							6. difficult to switch to new technologies
+							
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							#### Microservice architecture comes to the rescue
+
+							![](https://i.ibb.co/z60vcwb/2-70.png)
+							
+						</textarea>
+					</section>
+
+				  </section>
+				  <section>
+					<section data-markdown>
+						<textarea data-template>
+							##### What is microservice architecture (MSA)?
+							***
+
+							MSA is the principal organization of a distributed system based on microservices
+							 and their interaction with each other and with the environment over the network.
+							 
+							 ![](https://i.ibb.co/pzzbzkF/image2.png)
+							
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							#####  Key Features of Microservice
+							***
+							* small
+							* focused
+							* independent
+							* highly cohesive.							
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							#####  Small
+							***
+							This means that a service in a microservice 
+							architecture cannot be developed by more than 
+							one team. Each service solves one business problem, and one person is able to understand it. 
+							Because if one person is able to support the entire business logic of one service,
+							 he will build a truly effective solution. 						
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### focused
+							***
+							This means that the service solves only one business problem, and solves it well.
+							
+							![](https://i.ibb.co/LQsf6wW/focused.png)					
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### independent
+							***
+							This is when a change in one service does not require changes in another.
+							
+							![](https://i.ibb.co/5nGy5xy/1-1-Yj19-ROP1-Lbc7o-Xly-Czw-Rg.jpg)			
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### highly cohesive
+							***
+							This means that the class or component contains all the necessary methods for solving the problem.
+									
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Pluses of microservices 
+							***
+							* Clear division by modules.
+							* High availability. 
+							* A variety of technologies. 
+							*Relative ease of deployment. 
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Disadvantages 
+							***
+							* The complexity of the development.
+							* Complexity of support. 
+						</textarea>
+					</section>
+					
+				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							![](https://i.ibb.co/JsKLSG2/pngflow-com.png)
+
+							##### docker is a container
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							First, a docker image is created. It is created using the 
+							script that you write for this.Images are inherited and, usually,
+							to create our first image, we take the finished image and inherit from it. 
+							Most often, we take the image that contains this or that version of linux.
+							The script then starts something like this:
+							<pre><code data-trim data-noescape>
+								FROM ubuntu:16.04
+							</code></pre>
+							![](https://i.ibb.co/yPF003k/image-docker.jpg)
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							Further, with the help of the RUN directive, we can execute any commands that this Linux supports.
+							For example, <pre><code data-trim data-noescape></code> RUN apt-get install -y mc </code></pre> will install midnight commander into our image.
+						
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Container creation
+						
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							When you already have a docker image, you can create a container 
+							from it on any physical server where the docker is installed. If image
+							 is a replicated image of some “machine”, then container is already the 
+							 “machine” itself, which can be started and stopped.
+							 ![](https://i.ibb.co/wWDbqJZ/container.jpg)
+
+						
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Union filesystem
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							Union file system consists of layers. Layers are superimposed on each 
+							other. Some layers are write protected. For example, 
+							all our containers use shared, write-protected layers 
+							that contain immutable operating system files.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							##### Container registry
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							Docker provides a special service called docker registry. Docker registry is intended
+							 for storage and distribution of finished images. Having collected a new image 
+							 (or a new version of the image), you can upload it to the docker registry. 
+							 Accordingly, then it can be downloaded from there to any server. 
+							The main feature here is that only those layers that are needed will physically swing.
+						</textarea>
+					</section>
+					<section data-markdown>
+						<textarea data-template>
+							#### Conclusion
+							Thus, the docker is very suitable for solving the above problems:
+ 
+							* convenient transfer of the server project to the client
+							* server replication
+							* reuse of previously created server configurations
+ 
+						</textarea>
+					</section>
+
+					
+				</section>
+				
+				
+			
+				
+				 
 			</div>
 		</div>
 
